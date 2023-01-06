@@ -1,0 +1,31 @@
+uvmf:
+  interfaces:
+    add_out:
+      clock: "clk"
+      reset: "rst"
+      reset_assertion_level: "False"
+      veloce_ready: "False"
+      parameters:
+        - name: "ADD_WIDTH"
+          type: "int"
+          value: "4"
+
+  #port declaration
+      ports:
+        - name: "a"
+          dir: "input"
+          width: "ADD_WIDTH"
+        - name: "b"
+          dir: "input"
+          width: "ADD_WIDTH"
+
+            #transaction variables
+      transaction_vars:
+        - name: "a"
+          type: "bit [ADD_WIDTH-1:0]"
+          iscompare: "True"
+          isrand: "True"
+        - name: "b"
+          type: "bit [ADD_WIDTH-1:0]"
+          iscompare: "True"
+          isrand: "True"

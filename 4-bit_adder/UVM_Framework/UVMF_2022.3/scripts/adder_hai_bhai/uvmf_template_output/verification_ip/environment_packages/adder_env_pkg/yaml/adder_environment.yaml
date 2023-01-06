@@ -1,0 +1,44 @@
+uvmf:
+  environments:
+    adder:
+      agents:
+      - initiator_responder: INITIATOR
+        name: add_in_agent
+        type: add_in
+      - initiator_responder: RESPONDER
+        name: add_out_agent
+        type: add_out
+      analysis_components:
+      - name: add_pred
+        parameters: []
+        type: add_predictor
+      - name: add_sb
+        parameters: []
+        type: add_scoreboard
+      analysis_exports: []
+      analysis_ports:
+      - connected_to: add_in_agent.monitored_ap
+        name: add_in_ag_ap
+        trans_type: add_in_transaction
+      - connected_to: add_out_agent.monitored_ap
+        name: add_out_ag_ap
+        trans_type: add_out_transaction
+      config_constraints: []
+      config_vars: []
+      existing_library_component: 'True'
+      hvl_pkg_parameters: []
+      non_uvmf_components: []
+      parameters: []
+      qvip_memory_agents: []
+      scoreboards: []
+      subenvs: []
+      tlm_connections:
+      - driver: add_in_agent.monitored_ap
+        receiver: add_pred.add_in_ag_to_pred_ae
+        validate: 'True'
+      - driver: add_pred.pred_to_sb_ap
+        receiver: add_sb.pred_from_sb_ae
+        validate: 'True'
+      - driver: add_out_agent.monitored_ap
+        receiver: add_sb.add_out_ag_from_sb_ae
+        validate: 'True'

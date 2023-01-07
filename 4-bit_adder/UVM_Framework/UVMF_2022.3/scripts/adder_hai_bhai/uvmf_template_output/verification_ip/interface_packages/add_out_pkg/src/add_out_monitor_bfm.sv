@@ -68,12 +68,12 @@ end
 
   tri clk_i;
   tri rst_i;
-  tri [ADD_WIDTH-1:0] a_i;
-  tri [ADD_WIDTH-1:0] b_i;
+  tri [ADD_WIDTH-1:0] sum_i;
+  tri [ADD_WIDTH-1:0] cout_i;
   assign clk_i = bus.clk;
   assign rst_i = bus.rst;
-  assign a_i = bus.a;
-  assign b_i = bus.b;
+  assign sum_i = bus.sum;
+  assign cout_i = bus.cout;
 
   // Proxy handle to UVM monitor
   add_out_pkg::add_out_monitor #(
@@ -150,8 +150,8 @@ end
   task do_monitor();
     //
     // Available struct members:
-    //     //    monitored_trans.a
-    //     //    monitored_trans.b
+    //     //    monitored_trans.sum
+    //     //    monitored_trans.cout
     //     //
     // Reference code;
     //    How to wait for signal value
@@ -159,8 +159,8 @@ end
     //    
     //    How to assign a transaction variable, named xyz, from a signal.   
     //    All available input signals listed.
-    //      monitored_trans.xyz = a_i;  //    [ADD_WIDTH-1:0] 
-    //      monitored_trans.xyz = b_i;  //    [ADD_WIDTH-1:0] 
+    //      monitored_trans.xyz = sum_i;  //    [ADD_WIDTH-1:0] 
+    //      monitored_trans.xyz = cout_i;  //    [ADD_WIDTH-1:0] 
     // pragma uvmf custom do_monitor begin
     // UVMF_CHANGE_ME : Implement protocol monitoring.  The commented reference code 
     // below are examples of how to capture signal values and assign them to 

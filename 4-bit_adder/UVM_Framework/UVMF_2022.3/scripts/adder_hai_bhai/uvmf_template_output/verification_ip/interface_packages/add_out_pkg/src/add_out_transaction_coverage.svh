@@ -35,8 +35,8 @@ class add_out_transaction_coverage #(
     // UVMF_CHANGE_ME : Add coverage bins, crosses, exclusions, etc. according to coverage needs.
     option.auto_bin_max=1024;
     option.per_instance=1;
-    a: coverpoint coverage_trans.a;
-    b: coverpoint coverage_trans.b;
+    sum: coverpoint coverage_trans.sum;
+    cout: coverpoint coverage_trans.cout;
     // pragma uvmf custom covergroup end
   endgroup
 

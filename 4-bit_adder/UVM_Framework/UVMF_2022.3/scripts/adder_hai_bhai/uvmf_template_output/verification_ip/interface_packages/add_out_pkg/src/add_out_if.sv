@@ -19,8 +19,8 @@
 //
 // This template can be used to connect a DUT to these signals
 //
-// .dut_signal_port(add_out_bus.a), // Agent input 
-// .dut_signal_port(add_out_bus.b), // Agent input 
+// .dut_signal_port(add_out_bus.sum), // Agent input 
+// .dut_signal_port(add_out_bus.cout), // Agent input 
 
 import uvmf_base_pkg_hdl::*;
 import add_out_pkg_hdl::*;
@@ -32,32 +32,32 @@ interface  add_out_if #(
   (
   input tri clk, 
   input tri rst,
-  inout logic [ADD_WIDTH-1:0] a,
-  inout logic [ADD_WIDTH-1:0] b
+  inout logic [ADD_WIDTH-1:0] sum,
+  inout logic [ADD_WIDTH-1:0] cout
   );
 
 modport monitor_port 
   (
   input clk,
   input rst,
-  input a,
-  input b
+  input sum,
+  input cout
   );
 
 modport initiator_port 
   (
   input clk,
   input rst,
-  input a,
-  input b
+  input sum,
+  input cout
   );
 
 modport responder_port 
   (
   input clk,
   input rst,  
-  output a,
-  output b
+  output sum,
+  output cout
   );
   
 

@@ -12,20 +12,20 @@ uvmf:
 
   #port declaration
       ports:
-        - name: "a"
+        - name: "sum"
           dir: "input"
           width: "ADD_WIDTH"
-        - name: "b"
+        - name: "cout"
           dir: "input"
           width: "ADD_WIDTH"
 
             #transaction variables
       transaction_vars:
-        - name: "a"
+        - name: "sum"
           type: "bit [ADD_WIDTH-1:0]"
           iscompare: "True"
           isrand: "True"
-        - name: "b"
+        - name: "cout"
           type: "bit [ADD_WIDTH-1:0]"
           iscompare: "True"
           isrand: "True"

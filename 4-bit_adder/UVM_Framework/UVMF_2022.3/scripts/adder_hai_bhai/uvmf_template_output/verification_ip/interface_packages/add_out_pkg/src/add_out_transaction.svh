@@ -22,8 +22,8 @@ class add_out_transaction #(
                            ADD_WIDTH
                            ))
 
-  rand bit [ADD_WIDTH-1:0] a ;
-  rand bit [ADD_WIDTH-1:0] b ;
+  rand bit [ADD_WIDTH-1:0] sum ;
+  rand bit [ADD_WIDTH-1:0] cout ;
 
   //Constraints for the transaction variables:
 
@@ -46,7 +46,7 @@ class add_out_transaction #(
   virtual function string convert2string();
     // pragma uvmf custom convert2string begin
     // UVMF_CHANGE_ME : Customize format if desired.
-    return $sformatf("a:0x%x b:0x%x ",a,b);
+    return $sformatf("sum:0x%x cout:0x%x ",sum,cout);
     // pragma uvmf custom convert2string end
   endfunction
 
@@ -76,8 +76,8 @@ class add_out_transaction #(
     // pragma uvmf custom do_compare begin
     // UVMF_CHANGE_ME : Eliminate comparison of variables not to be used for compare
     return (super.do_compare(rhs,comparer)
-            &&(this.a == RHS.a)
-            &&(this.b == RHS.b)
+            &&(this.sum == RHS.sum)
+            &&(this.cout == RHS.cout)
             );
     // pragma uvmf custom do_compare end
   endfunction
@@ -94,8 +94,8 @@ class add_out_transaction #(
     assert($cast(RHS,rhs));
     // pragma uvmf custom do_copy begin
     super.do_copy(rhs);
-    this.a = RHS.a;
-    this.b = RHS.b;
+    this.sum = RHS.sum;
+    this.cout = RHS.cout;
     // pragma uvmf custom do_copy end
   endfunction
 
@@ -119,8 +119,8 @@ class add_out_transaction #(
     //   default : $add_color(transaction_view_h,"grey");
     // endcase
     // UVMF_CHANGE_ME : Eliminate transaction variables not wanted in transaction viewing in the waveform viewer
-    $add_attribute(transaction_view_h,a,"a");
-    $add_attribute(transaction_view_h,b,"b");
+    $add_attribute(transaction_view_h,sum,"sum");
+    $add_attribute(transaction_view_h,cout,"cout");
     // pragma uvmf custom add_to_wave end
     $end_transaction(transaction_view_h,end_time);
     $free_transaction(transaction_view_h);

@@ -90,10 +90,10 @@ end
   // directionality in the config file was from the point-of-view of the INITIATOR
 
   // INITIATOR mode input signals
-  tri [ADD_WIDTH-1:0] a_i;
-  reg [ADD_WIDTH-1:0] a_o = 'bz;
-  tri [ADD_WIDTH-1:0] b_i;
-  reg [ADD_WIDTH-1:0] b_o = 'bz;
+  tri [ADD_WIDTH-1:0] sum_i;
+  reg [ADD_WIDTH-1:0] sum_o = 'bz;
+  tri [ADD_WIDTH-1:0] cout_i;
+  reg [ADD_WIDTH-1:0] cout_o = 'bz;
 
   // INITIATOR mode output signals
 
@@ -105,10 +105,10 @@ end
 
   // These are signals marked as 'input' by the config file, but the signals will be
   // driven by this BFM if put into RESPONDER mode (flipping all signal directions around)
-  assign a_i = bus.a;
-  assign bus.a = (initiator_responder == RESPONDER) ? a_o : 'bz;
-  assign b_i = bus.b;
-  assign bus.b = (initiator_responder == RESPONDER) ? b_o : 'bz;
+  assign sum_i = bus.sum;
+  assign bus.sum = (initiator_responder == RESPONDER) ? sum_o : 'bz;
+  assign cout_i = bus.cout;
+  assign bus.cout = (initiator_responder == RESPONDER) ? cout_o : 'bz;
 
 
   // These are signals marked as 'output' by the config file, but the outputs will
@@ -126,8 +126,8 @@ end
   always @( negedge rst_i )
      begin
        // RESPONDER mode output signals
-       a_o <= 'bz;
-       b_o <= 'bz;
+       sum_o <= 'bz;
+       cout_o <= 'bz;
        // INITIATOR mode output signals
        // Bi-directional signals
  
@@ -172,8 +172,8 @@ end
                                   );
        // 
        // Variables within the initiator_trans:
-       //   bit [ADD_WIDTH-1:0] a ;
-       //   bit [ADD_WIDTH-1:0] b ;
+       //   bit [ADD_WIDTH-1:0] sum ;
+       //   bit [ADD_WIDTH-1:0] cout ;
        //
        // Reference code;
        //    How to wait for signal value
@@ -182,8 +182,8 @@ end
        //    How to assign a initiator_trans variable, named xyz, from a signal.   
        //    All available initiator input and inout signals listed.
        //    Initiator input signals:
-       //      initiator_trans.xyz = a_i;  //    [ADD_WIDTH-1:0] 
-       //      initiator_trans.xyz = b_i;  //    [ADD_WIDTH-1:0] 
+       //      initiator_trans.xyz = sum_i;  //    [ADD_WIDTH-1:0] 
+       //      initiator_trans.xyz = cout_i;  //    [ADD_WIDTH-1:0] 
        //    Initiator inout signals:
        //    How to assign a signal, named xyz, from a initiator_trans varaiable.   
        //    All available initiator output and inout signals listed.
@@ -219,8 +219,8 @@ bit first_transfer=1;
                                          responder_trans  
                                          );     
   // Variables within the responder_trans:
-  //   bit [ADD_WIDTH-1:0] a ;
-  //   bit [ADD_WIDTH-1:0] b ;
+  //   bit [ADD_WIDTH-1:0] sum ;
+  //   bit [ADD_WIDTH-1:0] cout ;
        // Reference code;
        //    How to wait for signal value
        //      while (control_signal == 1'b1) @(posedge clk_i);
@@ -233,8 +233,8 @@ bit first_transfer=1;
        //    All available responder output and inout signals listed.
        //    Notice the _o.  Those are storage variables that allow for procedural assignment.
        ///   Responder output signals
-       //      a_o <= responder_trans.xyz;  //    [ADD_WIDTH-1:0] 
-       //      b_o <= responder_trans.xyz;  //    [ADD_WIDTH-1:0] 
+       //      sum_o <= responder_trans.xyz;  //    [ADD_WIDTH-1:0] 
+       //      cout_o <= responder_trans.xyz;  //    [ADD_WIDTH-1:0] 
        //    Responder inout signals
     
 
